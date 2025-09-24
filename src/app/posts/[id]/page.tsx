@@ -1,12 +1,8 @@
 import { Post } from "@blog-cms/lib/types";
-
-const mockPosts: Post[] = [
-  { id: "1", title: "First Post", content: "Hello world" },
-  { id: "2", title: "Second Post", content: "Next.js is awesome" },
-];
+import { getPost } from "../actions";
 
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const post = mockPosts.find((p) => p.id === params.id);
+  const post: Post | null = await getPost(params.id);
 
   if (!post) return <p>Post not found.</p>;
 
